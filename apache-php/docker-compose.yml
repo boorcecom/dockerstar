@@ -1,0 +1,41 @@
+version: "3.5"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  httpd:
+    container_name: httpd
+    build:
+      context: .
+      dockerfile: Dockerfile.httpd
+    volumes:
+      - '/opt/apache_storage/sites-available:/etc/apache2/sites-available'
+      - '/opt/apache_storage/sites-enabled:/etc/apache2/sites-enabled'
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/var/www:/var/www'
+      - '/opt/apache_storage/logs:/var/log/apache2'
+      - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '/etc/squid:/etc/squid'
+    dns: 192.168.0.250
+    hostname: dockerstar02
+    networks:
+      net_local:
+        ipv4_address: 192.168.0.248
+        ipv6_address: 2a01:e0a:508:d990:42:c0ff:fea8:fb
+    restart: unless-stopped
+  db:
+    container_name: mariadb
+    image: mariadb
+    volumes:
+      - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    dns: 192.168.0.254
+    hostname: dockerstar03
+    environment:
+      MARIADB_ROOT_PASSWORD: Lapin@Ouais2022
+    
+networks:
+  net_local:
+    external: 
+      name: net_local

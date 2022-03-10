@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount iso %ISONAME%.iso
+RequiresMountsFor=/mnt/Freebox
+
+[Mount]
+What=/mnt/Freebox/winiso/%ISONAME%.iso
+Where=/var/www/html/pxe/%ISONAME%
+Type=udf
+Options=ro,uid=root,gid=users,mode=0555
+
+[Install]
+WantedBy=multi-user.target
