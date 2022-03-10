@@ -15,7 +15,7 @@ services:
     volumes:
       - '/opt/pihole_storage/etc-pihole:/etc/pihole/'
       - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
-      - '/var/lib/tftpboot:/var/lib/tftpboot/'
+      - '/opt/pihole_storage/var-lib-tftpboot:/var/lib/tftpboot/'
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:

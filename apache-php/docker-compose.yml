@@ -11,10 +11,11 @@ services:
       - '/opt/apache_storage/sites-available:/etc/apache2/sites-available'
       - '/opt/apache_storage/sites-enabled:/etc/apache2/sites-enabled'
       - '/etc/letsencrypt:/etc/letsencrypt'
-      - '/var/www:/var/www'
+      - '/opt/apache_storage/html:/var/www/html'
       - '/opt/apache_storage/logs:/var/log/apache2'
       - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d'
       - '/etc/squid:/etc/squid'
+      - '/opt/pxe:/opt/pxe'
     dns: 192.168.0.250
     hostname: dockerstar02
     networks:
