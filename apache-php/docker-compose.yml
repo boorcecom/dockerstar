@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
   db:
     container_name: mariadb
-    image: mariadb
+    image: mariadb:latest
     volumes:
       - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
     ports:
