@@ -1,0 +1,18 @@
+version: "3.5"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: squid
+    image: ubuntu/squid:latest
+    environment:
+      TZ: 'Europe/Paris'
+    volumes:
+      # - '/opt/squid_storage/etc-squid/:/etc/squid/'
+      - '/opt/squid_storage/var-spool-squid:/var/spool/squid/'
+    dns: 192.168.0.250
+    hostname: dockerstar04
+    ports:
+      - 3128:3128
+    restart: unless-stopped
+    

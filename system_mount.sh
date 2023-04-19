@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 for i in `ls /mnt/Freebox/winiso/*.iso`
 do
     ISONAME=`basename $i|sed -e 's/\.iso//g'`
