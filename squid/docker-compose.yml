@@ -2,7 +2,7 @@ version: "3.5"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
+  squid:
     container_name: squid
     image: ubuntu/squid:latest
     environment:
@@ -14,5 +14,12 @@ services:
     hostname: dockerstar04
     ports:
       - 3128:3128
+    networks:
+      - network1
     restart: unless-stopped
+
+networks:
+  network1:
+    name: docker_default
+    external: true
     

@@ -2,6 +2,20 @@ version: "3.5"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:latest
+    volumes:
+      - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    dns: 192.168.0.250
+#    hostname: dockerstar03
+    networks:
+      - network1
+    environment:
+      MARIADB_ROOT_PASSWORD: Lapin@Ouais2022
   httpd:
     container_name: httpd
     build:
@@ -18,25 +32,20 @@ services:
       - '/opt/pxe:/opt/pxe'
     dns: 192.168.0.250
     hostname: dockerstar02
-    networks:
-      net_local:
-        ipv4_address: 192.168.0.248
-        ipv6_address: 2a01:e0a:508:d990:42:c0ff:fea8:fb
-    restart: unless-stopped
-  db:
-    container_name: mariadb
-    image: mariadb:latest
-    volumes:
-      - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
     ports:
-      - 3306:3306
+      - 80:80
+      - 443:443
+    depends_on:
+      - mariadb
+    networks:
+      - network1
+#      net_local:
+#        ipv4_address: 192.168.0.248
+#        ipv6_address: 2a01:e0a:508:d990:42:c0ff:fea8:fb
     restart: unless-stopped
-    dns: 192.168.0.254
-    hostname: dockerstar03
-    environment:
-      MARIADB_ROOT_PASSWORD: Lapin@Ouais2022
     
 networks:
-  net_local:
-    external: 
-      name: net_local
+  network1:
+    external: true
+    name: docker_default
+
