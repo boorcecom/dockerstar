@@ -1,5 +1,5 @@
 FROM bacula-base:latest
-RUN DEBIAN_FRONTEND=noninteractive apt install -yq --no-install-recommends bacula-console bacula-dir bacula-sd bacula-fd apache2 php php-cli libapache2-mod-php php-curl php-gd php-intl php-memcache php-xml php-zip php-mbstring php-json php-bcmath php-mysqlnd php-ldap sudo make
+RUN DEBIAN_FRONTEND=noninteractive apt install -yq --no-install-recommends bacula-console bacula-common-mysql bacula-director-mysql bacula-director bacula-sd bacula-fd apache2 php php-cli libapache2-mod-php php-curl php-gd php-intl php-memcache php-xml php-zip php-mbstring php-json php-bcmath php-mysqlnd php-ldap sudo make
 RUN a2enmod rewrite
 COPY baculum-9.6.6.3.tar.gz /root
 WORKDIR /root
