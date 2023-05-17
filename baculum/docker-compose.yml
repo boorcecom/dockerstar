@@ -6,9 +6,6 @@ services:
     image: baculum:latest
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
-    ports:
-      - 9095:9095
-      - 9096:9096
     networks:
       - network1
     dns: 192.168.0.250
