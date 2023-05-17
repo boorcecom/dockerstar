@@ -10,7 +10,7 @@ services:
     build: director/
     image: bacula-director:latest
     volumes:
-      - /home/ncazier/work/bacula/etc/bacula:/etc/bacula
+      - /opt/bacula/etc/bacula:/etc/bacula
     ports:
       - 9101:9101
     networks:
@@ -24,7 +24,8 @@ services:
     depends_on:
       - bacula-director
     volumes:
-      - /home/ncazier/work/bacula/etc/bacula:/etc/bacula
+      - /opt/bacula/etc/bacula:/etc/bacula
+      - /opt/backupdev:/opt/backupdev
     ports:
       - 9103:9103
     networks:
