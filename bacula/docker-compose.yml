@@ -1,0 +1,37 @@
+version: "3.5"
+
+services:
+  bacula-base:
+    build: base/
+    image: bacula-base:latest
+    networks:
+      - network1
+  bacula-director:
+    build: director/
+    image: bacula-director:latest
+    volumes:
+      - /home/ncazier/work/bacula/etc/bacula:/etc/bacula
+    ports:
+      - 9101:9101
+    networks:
+      - network1
+    dns: 192.168.0.250
+    restart: unless-stopped
+  bacula-sd:
+    build: sd/
+    image: bacula-sd:latest
+    restart: unless-stopped
+    depends_on:
+      - bacula-director
+    volumes:
+      - /home/ncazier/work/bacula/etc/bacula:/etc/bacula
+    ports:
+      - 9103:9103
+    networks:
+      - network1
+    dns: 192.168.0.250      
+
+networks:
+  network1:
+    name: docker_default
+    external: true
