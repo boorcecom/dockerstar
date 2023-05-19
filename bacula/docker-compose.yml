@@ -25,7 +25,8 @@ services:
       - bacula-director
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
-      - /opt/backupdev:/opt/backupdev
+      - /mnt/Freebox/backups:/opt/backupdev
+      - /mnt/EXTERNAL/backups:/opt/backupdev2
     ports:
       - 9103:9103
     networks:
