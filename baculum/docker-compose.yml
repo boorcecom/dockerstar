@@ -10,6 +10,8 @@ services:
     networks:
       - network1
     dns: 192.168.0.250
+    environment:
+      TS: 'Europe/Paris'
     restart: unless-stopped
 
 networks:

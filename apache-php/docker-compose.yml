@@ -15,6 +15,7 @@ services:
     networks:
       - network1
     environment:
+      TZ: 'Europe/Paris'
       MARIADB_ROOT_PASSWORD: Lapin@Ouais2022
   httpd:
     container_name: httpd
@@ -42,6 +43,8 @@ services:
 #      net_local:
 #        ipv4_address: 192.168.0.248
 #        ipv6_address: 2a01:e0a:508:d990:42:c0ff:fea8:fb
+    environment:
+      TZ: 'Europe/Paris'
     restart: unless-stopped
     
 networks:

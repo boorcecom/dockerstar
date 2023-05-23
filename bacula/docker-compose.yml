@@ -16,6 +16,8 @@ services:
     networks:
       - network1
     dns: 192.168.0.250
+    environment:
+      TZ: 'Europe/Paris'
     restart: unless-stopped
   bacula-sd:
     build: sd/
@@ -31,6 +33,8 @@ services:
       - 9103:9103
     networks:
       - network1
+    environment:
+      TZ: 'Europe/Paris'
     dns: 192.168.0.250      
 
 networks:
