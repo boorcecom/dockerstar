@@ -11,7 +11,7 @@ services:
       PROXY_LOCATION: 'pihole.ad.boorce.com'
       WEBPASSWORD: 'Haddock@01'
       ServerIP: '192.168.0.250'
-      ServerIPv6: '2a01:e0a:508:d990:42:c0ff:fea8:fa'
+      ServerIPv6: '2a01:e0a:809:d140:42:c0ff:fea8:fa'
     volumes:
       - '/opt/pihole_storage/etc-pihole:/etc/pihole/'
       - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
@@ -25,7 +25,7 @@ services:
     networks:
       net_local:
         ipv4_address: 192.168.0.250
-        ipv6_address: 2a01:e0a:508:d990:42:c0ff:fea8:fa
+        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:fa
     restart: unless-stopped
     
 networks:

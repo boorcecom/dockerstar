@@ -1,0 +1,21 @@
+version: "3.5"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  mediamtx:
+    container_name: mediamtx
+    image: bluenviron/mediamtx:latest-ffmpeg
+    volumes:
+      - '/opt/mediamtx_storage/mediamtx.yml:/mediamtx.yml'
+    dns: 192.168.0.250
+    networks:
+      - network1
+    environment:
+      TS: 'Europe/Paris'
+    restart: unless-stopped
+
+networks:
+  network1:
+    name: docker_default
+    external: true
+
