@@ -4,18 +4,25 @@ version: "3.5"
 services:
   mediamtx:
     container_name: mediamtx
-    image: bluenviron/mediamtx:latest-ffmpeg
+    image: bluenviron/mediamtx:latest
     volumes:
+      - '/etc/letsencrypt:/etc/letsencrypt'
       - '/opt/mediamtx_storage/mediamtx.yml:/mediamtx.yml'
     dns: 192.168.0.250
-    networks:
-      - network1
+    ports:
+      - 8889:8889
     environment:
       TS: 'Europe/Paris'
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    networks:    
+      net_local:
+        ipv4_address: 192.168.0.251
+        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:fb
 
 networks:
-  network1:
-    name: docker_default
-    external: true
+  net_local:
+    external:
+      name: net_local
 

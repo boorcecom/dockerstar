@@ -1,0 +1,20 @@
+version: "3.5"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  omniktcp:
+    build: ./
+    image: omniktcp:latest
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    networks:
+      - network1
+    environment:
+      TZ: 'Europe/Paris'
+    dns: 192.168.0.250      
+
+networks:
+  network1:
+    name: docker_default
+    external: true
