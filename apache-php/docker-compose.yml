@@ -17,6 +17,29 @@ services:
     environment:
       TZ: 'Europe/Paris'
       MARIADB_ROOT_PASSWORD: Lapin@Ouais2022
+  publichttpd:
+    container_name: publichttpd
+    build:
+      context: .
+      dockerfile: Dockerfile.httpd
+    volumes:
+      - '/opt/apache_storage/sites-available_public:/etc/apache2/sites-available'
+      - '/opt/apache_storage/sites-enabled_public:/etc/apache2/sites-enabled'
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/apache_storage/html_public:/var/www/html'
+      - '/opt/apache_storage/logs:/var/log/apache2'
+    dns: 192.168.0.250
+    hostname: publichttpd
+    ports:
+      - 8080:80
+      - 8443:443
+    depends_on:
+      - mariadb
+    networks:
+      - network1
+    environment:
+      TZ: 'Europe/Paris'
+    restart: unless-stopped
   httpd:
     container_name: httpd
     build:
@@ -38,12 +61,13 @@ services:
       - 443:443
     depends_on:
       - mariadb
+      - publichttpd
     networks:
       - network1
     environment:
       TZ: 'Europe/Paris'
     restart: unless-stopped
-    
+
 networks:
   network1:
     external: true
