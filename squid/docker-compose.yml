@@ -8,10 +8,11 @@ services:
     environment:
       TZ: 'Europe/Paris'
     volumes:
-      # - '/opt/squid_storage/etc-squid/:/etc/squid/'
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/squid_storage/etc-squid:/etc/squid/'
       - '/opt/squid_storage/var-spool-squid:/var/spool/squid/'
     dns: 192.168.0.250
-    hostname: dockerstar04
+    hostname: squid
     ports:
       - 3128:3128
     networks:

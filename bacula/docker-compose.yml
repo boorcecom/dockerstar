@@ -2,17 +2,20 @@ version: "3.5"
 
 services:
   bacula-base:
+    container_name: bacula-base
     build: base/
     image: bacula-base:latest
     networks:
       - network1
   bacula-director:
+    container_name: bacula-dir
     build: director/
     image: bacula-director:latest
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
-    ports:
-      - 9101:9101
+#    ports:
+#      - 9101:9101
+    hostname: bacula-dir
     networks:
       - network1
     dns: 192.168.0.250
@@ -20,6 +23,7 @@ services:
       TZ: 'Europe/Paris'
     restart: unless-stopped
   bacula-sd:
+    container_name: bacula-sd
     build: sd/
     image: bacula-sd:latest
     restart: unless-stopped
@@ -31,6 +35,7 @@ services:
       - /mnt/EXTERNAL/backups:/opt/backupdev2
     ports:
       - 9103:9103
+    hostname: bacula-sd
     networks:
       - network1
     environment:

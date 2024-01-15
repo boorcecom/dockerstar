@@ -2,6 +2,7 @@ version: "3.5"
 
 services:
   baculum:
+    container_name: baculum
     build: ./
     image: baculum:latest
     volumes:
@@ -9,6 +10,7 @@ services:
       - /opt/bacula/etc/baculum:/etc/baculum
     networks:
       - network1
+    hostname: baculum
     dns: 192.168.0.250
     environment:
       TS: 'Europe/Paris'

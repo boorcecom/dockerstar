@@ -7,11 +7,11 @@ services:
     image: mariadb:latest
     volumes:
       - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
-    ports:
-      - 3306:3306
+#    ports:
+#      - 3306:3306
     restart: unless-stopped
+    hostname: mariadb
     dns: 192.168.0.250
-#    hostname: dockerstar03
     networks:
       - network1
     environment:
@@ -32,7 +32,7 @@ services:
       - '/etc/squid:/etc/squid'
       - '/opt/pxe:/opt/pxe'
     dns: 192.168.0.250
-    hostname: dockerstar02
+    hostname: httpd
     ports:
       - 80:80
       - 443:443
@@ -40,9 +40,6 @@ services:
       - mariadb
     networks:
       - network1
-#      net_local:
-#        ipv4_address: 192.168.0.248
-#        ipv6_address: 2a01:e0a:508:d990:42:c0ff:fea8:fb
     environment:
       TZ: 'Europe/Paris'
     restart: unless-stopped

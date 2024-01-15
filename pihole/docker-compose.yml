@@ -13,6 +13,8 @@ services:
       ServerIP: '192.168.0.250'
       ServerIPv6: '2a01:e0a:809:d140:42:c0ff:fea8:fa'
     volumes:
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/pihole_storage/10-ssl.conf:/etc/lighttpd/conf-enabled/10-ssl.conf'
       - '/opt/pihole_storage/etc-pihole:/etc/pihole/'
       - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
       - '/opt/pihole_storage/var-lib-tftpboot:/var/lib/tftpboot/'

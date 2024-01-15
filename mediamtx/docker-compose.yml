@@ -16,6 +16,7 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
+    hostname: mediamtx
     networks:    
       net_local:
         ipv4_address: 192.168.0.251
