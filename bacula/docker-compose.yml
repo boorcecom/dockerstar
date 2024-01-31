@@ -4,13 +4,13 @@ services:
   bacula-base:
     container_name: bacula-base
     build: base/
-    image: bacula-base:latest
+    image: bacula-base:trixie
     networks:
       - network1
   bacula-director:
     container_name: bacula-dir
     build: director/
-    image: bacula-director:latest
+    image: bacula-director:trixie
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
 #    ports:
@@ -25,7 +25,7 @@ services:
   bacula-sd:
     container_name: bacula-sd
     build: sd/
-    image: bacula-sd:latest
+    image: bacula-sd:trixie
     restart: unless-stopped
     depends_on:
       - bacula-director

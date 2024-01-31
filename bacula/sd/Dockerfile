@@ -1,4 +1,4 @@
-FROM bacula-base:latest
+FROM bacula-base:trixie
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq --no-install-recommends bacula-sd
 EXPOSE 9103/tcp
 VOLUME ["/etc/bacula"]
