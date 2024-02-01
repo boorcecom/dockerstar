@@ -1,0 +1,37 @@
+version: "3.5"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: samba-ad-dc
+    image: samba-ad-dc:trixie
+    environment:
+      TZ: 'Europe/Paris'
+    volumes:
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/samba_storage/krb5.conf:/etc/krb5.conf'
+      - '/opt/samba_storage/etc-samba:/etc/samba/'
+      - '/opt/samba_storage/varlib-samba:/var/lib/samba/'
+      - '/opt/samba_storage/varcache-samba:/var/cache/samba/'
+      - '/opt/samba_storage/varlog-samba:/var/log/samba/'
+      - '/opt/samba_storage/run-samba:/run/samba/'
+    cap_add:
+      - NET_ADMIN
+    stdin_open: true
+    tty: true
+    dns: 192.168.0.250
+    hostname: dc01
+    networks:
+#      - network1
+      net_local:
+        ipv4_address: 192.168.0.252
+        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:dc01
+    restart: unless-stopped
+    
+networks:
+  net_local:
+    external: 
+      name: net_local
+#  network1:
+#    external: true
+#    name: docker_default    
