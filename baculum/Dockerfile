@@ -1,6 +1,5 @@
 FROM debian:trixie-slim
-RUN DEBIAN_FRONTEND=noninteractive apt update
-RUN DEBIAN_FRONTEND=noninteractive apt install -yq --no-install-recommends bacula-common bacula-console bacula-common-mysql bacula-director-mysql bacula-director bacula-sd bacula-fd apache2 php php-common php-cli libapache2-mod-php php-curl php-gd php-intl php-xml php-zip php-mbstring php-json php-bcmath php-mysqlnd php-ldap php-memcache sudo make
+RUN DEBIAN_FRONTEND=noninteractive apt update && DEBIAN_FRONTEND=noninteractive apt install -yq --no-install-recommends bacula-common bacula-console bacula-common-mysql bacula-director-mysql bacula-director bacula-sd bacula-fd apache2 php php-common php-cli libapache2-mod-php php-curl php-gd php-intl php-xml php-zip php-mbstring php-json php-bcmath php-mysqlnd php-ldap php-memcache sudo make
 RUN a2enmod rewrite
 COPY bacula-gui-13.0.3.tar.gz /root
 WORKDIR /root
