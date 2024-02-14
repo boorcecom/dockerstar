@@ -2,7 +2,7 @@ version: "3.5"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
+  samba-ad-dc:
     container_name: samba-ad-dc
     image: samba-ad-dc:trixie
     environment:
@@ -20,12 +20,15 @@ services:
     stdin_open: true
     tty: true
     dns: 192.168.0.250
+    dns_search:
+      - ad.boorce.com
     hostname: dc01
+    privileged: true
     networks:
 #      - network1
       net_local:
         ipv4_address: 192.168.0.252
-        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:dc01
+        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:fc
     restart: unless-stopped
     
 networks:
