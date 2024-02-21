@@ -10,6 +10,8 @@ services:
     volumes:
       - '/etc/letsencrypt:/etc/letsencrypt'
       - '/opt/doh_storage/doh-server.conf:/doh-server.conf'
+    ports:
+      - 8053:8053
     hostname: doh
     networks:
       - network1
