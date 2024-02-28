@@ -1,10 +1,5 @@
 FROM php:apache
-RUN apt update
-RUN apt install -y libcurl4-openssl-dev libzip-dev zlib1g bzip2 libbz2-dev libpng-dev libjpeg-dev
+RUN apt update && apt install -y libcurl4-openssl-dev libzip-dev zlib1g bzip2 libbz2-dev libpng-dev libjpeg-dev && apt clean
 RUN docker-php-ext-install mysqli curl zip bz2 gd
-RUN a2enmod ssl
-RUN a2enmod proxy
-RUN a2enmod proxy_http
-RUN a2enmod expires
-RUN a2enmod rewrite
+RUN a2enmod ssl && a2enmod proxy && a2enmod proxy_http && a2enmod expires && a2enmod rewrite
 
