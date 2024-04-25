@@ -7,8 +7,8 @@ services:
     image: mariadb:latest
     volumes:
       - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
-#    ports:
-#      - 3306:3306
+    ports:
+      - 3306:3306
     restart: unless-stopped
     hostname: mariadb
     dns: 192.168.0.250

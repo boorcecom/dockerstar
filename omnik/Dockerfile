@@ -1,3 +1,3 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 COPY omnikTCPServer omnikTCPServer
 ENTRYPOINT ["/omnikTCPServer"]
