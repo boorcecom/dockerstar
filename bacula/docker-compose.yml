@@ -18,7 +18,7 @@ services:
     hostname: bacula-dir
     networks:
       - network1
-    dns: 192.168.0.250
+    dns: 192.168.0.240
     environment:
       TZ: 'Europe/Paris'
     restart: unless-stopped

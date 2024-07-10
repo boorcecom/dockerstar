@@ -28,7 +28,7 @@ services:
       - '/etc/letsencrypt:/etc/letsencrypt'
       - '/opt/apache_storage/html_public:/var/www/html'
       - '/opt/apache_storage/logs:/var/log/apache2'
-    dns: 192.168.0.250
+    dns: 192.168.0.240
     hostname: publichttpd
     ports:
       - 8080:80

@@ -19,7 +19,7 @@ services:
       - NET_ADMIN
     stdin_open: true
     tty: true
-    dns: 192.168.0.250
+    dns: 192.168.0.240
     dns_search:
       - ad.boorce.com
     hostname: dc01

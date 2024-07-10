@@ -11,7 +11,7 @@ services:
       - '/etc/letsencrypt:/etc/letsencrypt'
       - '/opt/squid_storage/etc-squid:/etc/squid/'
       - '/opt/squid_storage/var-spool-squid:/var/spool/squid/'
-    dns: 192.168.0.250
+    dns: 192.168.0.240
     hostname: squid
     ports:
       - 3128:3128
