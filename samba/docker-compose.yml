@@ -15,6 +15,7 @@ services:
       - '/opt/samba_storage/varcache-samba:/var/cache/samba/'
       - '/opt/samba_storage/varlog-samba:/var/log/samba/'
       - '/opt/samba_storage/run-samba:/run/samba/'
+      - '/opt/pxe:/pxe'
     cap_add:
       - NET_ADMIN
     stdin_open: true

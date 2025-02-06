@@ -32,7 +32,7 @@ services:
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
       - /mnt/Freebox/backups:/opt/backupdev
-      - /mnt/EXTERNAL/backups:/opt/backupdev2
+      - /mnt/Freebox/backups2:/opt/backupdev2
     ports:
       - 9103:9103
     hostname: bacula-sd
