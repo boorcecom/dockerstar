@@ -1,11 +1,9 @@
-version: "3.5"
-
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   omniktcp:
     container_name: omniktcp
-    build: ./
-    image: omniktcp:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile.omnik
     ports:
       - 8989:8989
     restart: unless-stopped

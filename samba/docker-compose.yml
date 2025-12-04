@@ -1,10 +1,9 @@
-version: "3.5"
-
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   samba-ad-dc:
     container_name: samba-ad-dc
-    image: samba-ad-dc:trixie
+    build:
+      context: .
+      dockerfile: Dockerfile.samba
     environment:
       TZ: 'Europe/Paris'
     volumes:
@@ -33,9 +32,9 @@ services:
     restart: unless-stopped
     
 networks:
+#  net_local:
+#    external: 
+#      name: net_local
   net_local:
-    external: 
-      name: net_local
-#  network1:
-#    external: true
-#    name: docker_default    
+    external: true
+    name: net_local

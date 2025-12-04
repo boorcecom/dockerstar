@@ -1,16 +1,9 @@
-version: "3.5"
-
 services:
-  bacula-base:
-    container_name: bacula-base
-    build: base/
-    image: bacula-base:trixie
-    networks:
-      - network1
   bacula-director:
     container_name: bacula-dir
-    build: director/
-    image: bacula-director:trixie
+    build: 
+      context: .
+      dockerfile: Dockerfile.director
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
 #    ports:
@@ -24,8 +17,9 @@ services:
     restart: unless-stopped
   bacula-sd:
     container_name: bacula-sd
-    build: sd/
-    image: bacula-sd:trixie
+    build:
+      context: .
+      dockerfile: Dockerfile.sd
     restart: unless-stopped
     depends_on:
       - bacula-director

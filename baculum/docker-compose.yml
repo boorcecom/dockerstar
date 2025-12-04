@@ -1,10 +1,9 @@
-version: "3.5"
-
 services:
   baculum:
     container_name: baculum
-    build: ./
-    image: baculum:trixie
+    build: 
+      context: .
+      dockerfile: Dockerfile.baculum
     volumes:
       - /opt/bacula/etc/bacula:/etc/bacula
       - /opt/bacula/etc/baculum:/etc/baculum
