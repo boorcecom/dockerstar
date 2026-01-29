@@ -1,6 +1,7 @@
 services:
   baculum:
     container_name: baculum
+    image: baculum:trixie
     build: 
       context: .
       dockerfile: Dockerfile.baculum

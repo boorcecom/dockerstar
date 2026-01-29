@@ -1,4 +1,4 @@
-FROM bacula-director:trixie
+FROM bacula-dir:trixie
 RUN DEBIAN_FRONTEND=noninteractive apt install -yq --no-install-recommends bacula-sd bacula-fd apache2 php php-common php-cli libapache2-mod-php php-curl php-gd php-intl php-xml php-zip php-mbstring php-json php-bcmath php-mysqlnd php-ldap php-memcache sudo make && apt clean
 RUN a2enmod rewrite
 COPY bacula-gui-15.0.2.tar.gz /root

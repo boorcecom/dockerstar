@@ -1,6 +1,7 @@
 services:
   samba-ad-dc:
     container_name: samba-ad-dc
+    image: samba-ad-dc:trixie
     build:
       context: .
       dockerfile: Dockerfile.samba

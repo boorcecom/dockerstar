@@ -1,6 +1,7 @@
 services:
   omniktcp:
     container_name: omniktcp
+    image: omniktcp:latest
     build: 
       context: .
       dockerfile: Dockerfile.omnik

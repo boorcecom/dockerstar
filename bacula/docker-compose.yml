@@ -1,6 +1,7 @@
 services:
   bacula-director:
     container_name: bacula-dir
+    image: bacula-dir:trixie
     build: 
       context: .
       dockerfile: Dockerfile.director
@@ -17,6 +18,7 @@ services:
     restart: unless-stopped
   bacula-sd:
     container_name: bacula-sd
+    image: bacula-sd:trixie
     build:
       context: .
       dockerfile: Dockerfile.sd
