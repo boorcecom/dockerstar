@@ -17,7 +17,7 @@ services:
     networks:    
       net_local:
         ipv4_address: 192.168.0.251
-        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:fb
+        ipv6_address: 2a01:e0a:fda:4170:42:c0ff:fea8:fb
 
 networks:
   net_local:

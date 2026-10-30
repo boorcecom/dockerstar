@@ -8,7 +8,7 @@ services:
       FTLCONF_webserver_api_password: 'Haddock@01'
     volumes:
       - '/opt/pihole_storage/etc-pihole:/etc/pihole/'
-      - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
+#      - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
       - '/opt/pihole_storage/var-lib-tftpboot:/var/lib/tftpboot/'
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
@@ -19,7 +19,7 @@ services:
     networks:
       net_local:
         ipv4_address: 192.168.0.250
-        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:fa
+        ipv6_address: 2a01:e0a:fda:4170:42:c0ff:fea8:fa
     restart: unless-stopped
     
 networks:

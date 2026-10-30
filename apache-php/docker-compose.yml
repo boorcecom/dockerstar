@@ -8,7 +8,7 @@ services:
       - 3306:3306
     restart: unless-stopped
     hostname: mariadb
-    dns: 192.168.0.250
+    dns: 192.168.0.240
     networks:
       - network1
     environment:
@@ -51,7 +51,7 @@ services:
       - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d'
       - '/etc/squid:/etc/squid'
       - '/opt/pxe:/opt/pxe'
-    dns: 192.168.0.250
+    dns: 192.168.0.240
     hostname: httpd
     ports:
       - 80:80

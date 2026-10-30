@@ -16,6 +16,7 @@ services:
       - '/opt/samba_storage/varlog-samba:/var/log/samba/'
       - '/opt/samba_storage/run-samba:/run/samba/'
       - '/opt/pxe:/pxe'
+      - '/mnt:/mnt'
     cap_add:
       - NET_ADMIN
     stdin_open: true
@@ -29,7 +30,7 @@ services:
 #      - network1
       net_local:
         ipv4_address: 192.168.0.252
-        ipv6_address: 2a01:e0a:809:d140:42:c0ff:fea8:fc
+        ipv6_address: 2a01:e0a:fda:4170:42:c0ff:fea8:fc
     restart: unless-stopped
     
 networks:
