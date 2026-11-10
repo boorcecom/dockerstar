@@ -1,0 +1,35 @@
+services:
+  solar2:
+    container_name: solar2
+    image: solar2:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      TZ: 'Europe/Paris'
+      SOLAR_DB_HOST: mariadb
+      SOLAR_TRUST_PROXY: 'true'   # derrière le reverse proxy Apache (httpd / publichttpd)
+    # Aucun port publié : seuls les conteneurs du réseau docker_default (Apache) y accèdent.
+    networks:
+      - network1
+    dns: 192.168.0.240
+    hostname: solar2
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 64m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+
+networks:
+  network1:
+    name: docker_default
+    external: true

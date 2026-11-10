@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- soleil : disque + 8 rayons, dans la zone sûre (66 dp) des icônes adaptatives -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-14,0a14,14 0,1 1,28 0a14,14 0,1 1,-28 0" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M54,29L54,34M54,74L54,79M29,54L34,54M74,54L79,54M36.3,36.3L39.8,39.8M68.2,68.2L71.7,71.7M71.7,36.3L68.2,39.8M39.8,68.2L36.3,71.7" />
+</vector>
