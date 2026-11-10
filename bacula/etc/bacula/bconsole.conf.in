@@ -9,5 +9,5 @@ Director {
   Name = eb41b411c480-dir
   DIRport = 9101
   address = bacula-director
-  Password = "nL1oJZmu2rwKJiA9TEhQYZGoTmkGQcmlY"
+  Password = "${BACULA_DIR_CONSOLE_PASSWORD}"
 }

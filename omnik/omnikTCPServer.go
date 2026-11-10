@@ -19,14 +19,24 @@ const (
 
 var db *sql.DB
 
+func getenv(key, def string) string {
+	if v := os.Getenv(key); v != "" {
+		return v
+	}
+	return def
+}
+
 func dbconnect() {
+	if os.Getenv("OMNIK_DB_PASSWORD") == "" {
+		log.Fatal("OMNIK_DB_PASSWORD non défini")
+	}
 	// Capture connection properties.
 	cfg := mysql.Config{
-		User:                 "omnik",
-		Passwd:               "Me6q8gjaUha",
+		User:                 getenv("OMNIK_DB_USER", "omnik"),
+		Passwd:               os.Getenv("OMNIK_DB_PASSWORD"),
 		Net:                  "tcp",
-		Addr:                 "mariadb:3306",
-		DBName:               "solar",
+		Addr:                 getenv("OMNIK_DB_HOST", "mariadb") + ":3306",
+		DBName:               getenv("OMNIK_DB_NAME", "solar"),
 		AllowNativePasswords: true,
 	}
 	// Get a database handle.

@@ -3,19 +3,20 @@ import json
 import pymysql.cursors
 import datetime
 import requests
+import os
 
-token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlsiMDE0NTUyODIxNjAyMDUiXSwiZXhwIjoxODA4Mzk1NzI1LCJpYXQiOjE3MTQwNDY5MjV9.rHmVwAk1lRw5okanTJbw5cXbsxUMBfqloCBmr4hDZgc'
-PRM='01455282160205'
+token = os.environ['LINKY_TOKEN']
+PRM = os.environ['LINKY_PRM']
 apiurl= 'https://conso.boris.sh/api/'
 cert_path='/etc/ssl/certs/ca-certificates.crt'
 
 strDateTime=datetime.datetime.now().strftime("%Y-%m-%d")
 
 mydb= pymysql.connect(
-    host="192.168.0.253",
-    user="root",
-    password="Lapin@Ouais2022",
-    database="solar",
+    host=os.environ.get("DB_HOST", "mariadb"),
+    user=os.environ["DB_USER"],
+    password=os.environ["DB_PASSWORD"],
+    database=os.environ.get("DB_NAME", "solar"),
     cursorclass=pymysql.cursors.DictCursor
 )
 

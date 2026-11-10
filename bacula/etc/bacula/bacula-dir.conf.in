@@ -22,7 +22,7 @@ Director {                            # define myself
   WorkingDirectory = "/var/lib/bacula"
   PidDirectory = "/run/bacula"
   Maximum Concurrent Jobs = 20
-  Password = "nL1oJZmu2rwKJiA9TEhQYZGoTmkGQcmlY"         # Console password
+  Password = "${BACULA_DIR_CONSOLE_PASSWORD}"         # Console password
   Messages = Daemon
 #  DirAddress = 127.0.0.1
 }
@@ -175,7 +175,7 @@ Client {
   Address = localhost
   FDPort = 9102
   Catalog = MyCatalog
-  Password = "5HUhzU8MZ5ZfgaETme4yodPMxpp3rlXM8"          # password for FileDaemon
+  Password = "${BACULA_FD_PASSWORD}"          # password for FileDaemon
   File Retention = 60 days            # 60 days
   Job Retention = 6 months            # six months
   AutoPrune = yes                     # Prune expired Jobs/Files
@@ -190,7 +190,7 @@ Client {
 #  Address = localhost2
 #  FDPort = 9102
 #  Catalog = MyCatalog
-#  Password = "5HUhzU8MZ5ZfgaETme4yodPMxpp3rlXM82"        # password for FileDaemon 2
+#  Password = "${BACULA_FD_PASSWORD}2"        # password for FileDaemon 2
 #  File Retention = 60 days           # 60 days
 #  Job Retention = 6 months           # six months
 #  AutoPrune = yes                    # Prune expired Jobs/Files
@@ -203,7 +203,7 @@ Autochanger {
 # Do not use "localhost" here
   Address = bacula-sd                # N.B. Use a fully qualified name here
   SDPort = 9103
-  Password = "GLoih08H3f8Rmo0C6YmWMDVulbOsT9_HS"
+  Password = "${BACULA_SD_PASSWORD}"
   Device = FileChgr1
   Media Type = File1
   Maximum Concurrent Jobs = 10        # run up to 10 jobs a the same time
@@ -217,7 +217,7 @@ Autochanger {
 ## Do not use "localhost" here
 #  Address = localhost                # N.B. Use a fully qualified name here
 #  SDPort = 9103
-#  Password = "GLoih08H3f8Rmo0C6YmWMDVulbOsT9_HS"
+#  Password = "${BACULA_SD_PASSWORD}"
 #  Device = FileChgr2
 #  Media Type = File2
 #  Autochanger = File2                 # point to ourself
@@ -230,7 +230,7 @@ Autochanger {
 #  Do not use "localhost" here
 #  Address = localhost               # N.B. Use a fully qualified name here
 #  SDPort = 9103
-#  Password = "GLoih08H3f8Rmo0C6YmWMDVulbOsT9_HS"         # password for Storage daemon
+#  Password = "${BACULA_SD_PASSWORD}"         # password for Storage daemon
 #  Device = LTO-4                     # must be same as Device in Storage daemon
 #  Media Type = LTO-4                 # must be same as MediaType in Storage daemon
 #  Autochanger = LTO-4                # enable for autochanger device
@@ -240,7 +240,7 @@ Autochanger {
 # Generic catalog service
 Catalog {
   Name = MyCatalog
-  dbname = "bacula"; DB Address = "mariadb"; DB Port= "3306"; dbuser = "bacula"; dbpassword = "kEQcONqdhKsB"
+  dbname = "bacula"; DB Address = "mariadb"; DB Port= "3306"; dbuser = "bacula"; dbpassword = "${BACULA_DB_PASSWORD}"
 }
 
 # Reasonable message delivery -- send most everything to email address
@@ -319,6 +319,6 @@ Pool {
 #
 Console {
   Name = 313105d934fb-mon
-  Password = "FtVGDJ_MiDmzmNctF6Du6ZL9mxzF_PVkW"
+  Password = "${BACULA_DIR_MON_PASSWORD}"
   CommandACL = status, .status
 }

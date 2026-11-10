@@ -13,7 +13,7 @@ services:
       - network1
     environment:
       TZ: 'Europe/Paris'
-      MARIADB_ROOT_PASSWORD: Lapin@Ouais2022
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?défini dans .env}
   publichttpd:
     container_name: publichttpd
     build:

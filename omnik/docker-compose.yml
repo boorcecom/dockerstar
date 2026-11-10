@@ -11,6 +11,8 @@ services:
     hostname: omniktcp
     networks:
       - network1
+    env_file:
+      - .env
     environment:
       TZ: 'Europe/Paris'
     dns: 192.168.0.240      

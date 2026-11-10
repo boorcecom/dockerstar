@@ -29,7 +29,7 @@ Storage {                             # definition of myself
 #
 Director {
   Name = 313105d934fb-dir
-  Password = "GLoih08H3f8Rmo0C6YmWMDVulbOsT9_HS"
+  Password = "${BACULA_SD_PASSWORD}"
 }
 
 #
@@ -38,7 +38,7 @@ Director {
 #
 Director {
   Name = 313105d934fb-mon
-  Password = "AHH-r1_cOJgS7bzY7jyxFTlzVWTF-rl8g"
+  Password = "${BACULA_SD_MON_PASSWORD}"
   Monitor = yes
 }
 

@@ -5,7 +5,7 @@ services:
     environment:
       TZ: 'Europe/Paris'
       PROXY_LOCATION: 'pihole.ad.boorce.com'
-      FTLCONF_webserver_api_password: 'Haddock@01'
+      FTLCONF_webserver_api_password: ${PIHOLE_API_PASSWORD:?défini dans .env}
     volumes:
       - '/opt/pihole_storage/etc-pihole:/etc/pihole/'
 #      - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
