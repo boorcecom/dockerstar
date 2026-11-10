@@ -9,7 +9,7 @@ services:
     ports:
       - 8889:8889
     environment:
-      TS: 'Europe/Paris'
+      TZ: 'Europe/Paris'
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
