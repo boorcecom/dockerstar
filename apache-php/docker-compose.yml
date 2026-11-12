@@ -1,7 +1,7 @@
 services:
   mariadb:
     container_name: mariadb
-    image: mariadb:latest
+    image: mariadb:13
     volumes:
       - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
     ports:
