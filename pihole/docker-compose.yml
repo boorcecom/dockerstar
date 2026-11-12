@@ -1,0 +1,28 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    environment:
+      TZ: 'Europe/Paris'
+      PROXY_LOCATION: 'pihole.ad.boorce.com'
+      FTLCONF_webserver_api_password: ${PIHOLE_API_PASSWORD:?défini dans .env}
+    volumes:
+      - '/opt/pihole_storage/etc-pihole:/etc/pihole/'
+#      - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d/'
+      - '/opt/pihole_storage/var-lib-tftpboot:/var/lib/tftpboot/'
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    dns: 192.168.0.254
+    hostname: dockerstar01
+    networks:
+      net_local:
+        ipv4_address: 192.168.0.250
+        ipv6_address: 2a01:e0a:fda:4170:42:c0ff:fea8:fa
+    restart: unless-stopped
+    
+networks:
+  net_local:
+    external: 
+      name: net_local

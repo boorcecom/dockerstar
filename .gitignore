@@ -1,0 +1,7 @@
+# Secrets : ne jamais versionner (voir .env.example dans chaque dossier)
+.env
+*.pfx
+*.pem
+linky.env
+omnik/omnikTCPServer
+__pycache__/

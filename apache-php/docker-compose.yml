@@ -1,0 +1,72 @@
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:13
+    volumes:
+      - '/opt/mysql_storage/var-lib-mysql/:/var/lib/mysql'
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    hostname: mariadb
+    dns: 192.168.0.240
+    networks:
+      - network1
+    environment:
+      TZ: 'Europe/Paris'
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?défini dans .env}
+  publichttpd:
+    container_name: publichttpd
+    build:
+      context: .
+      dockerfile: Dockerfile.httpd
+    volumes:
+      - '/opt/apache_storage/sites-available_public:/etc/apache2/sites-available'
+      - '/opt/apache_storage/sites-enabled_public:/etc/apache2/sites-enabled'
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/apache_storage/html_public:/var/www/html'
+      - '/opt/apache_storage/logs:/var/log/apache2'
+    dns: 192.168.0.240
+    hostname: publichttpd
+    ports:
+      - 8080:80
+      - 8443:443
+    depends_on:
+      - mariadb
+    networks:
+      - network1
+    environment:
+      TZ: 'Europe/Paris'
+    restart: unless-stopped
+  httpd:
+    container_name: httpd
+    build:
+      context: .
+      dockerfile: Dockerfile.httpd
+    volumes:
+      - '/opt/apache_storage/sites-available:/etc/apache2/sites-available'
+      - '/opt/apache_storage/sites-enabled:/etc/apache2/sites-enabled'
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/apache_storage/html:/var/www/html'
+      - '/opt/apache_storage/logs:/var/log/apache2'
+      - '/opt/pihole_storage/etc-dnsmasq.d:/etc/dnsmasq.d'
+      - '/etc/squid:/etc/squid'
+      - '/opt/pxe:/opt/pxe'
+    dns: 192.168.0.240
+    hostname: httpd
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - mariadb
+      - publichttpd
+    networks:
+      - network1
+    environment:
+      TZ: 'Europe/Paris'
+    restart: unless-stopped
+
+networks:
+  network1:
+    external: true
+    name: docker_default
+

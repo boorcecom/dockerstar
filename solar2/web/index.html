@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Production solaire</title>
+  <meta name="description" content="Production de mes panneaux solaires">
+  <meta name="theme-color" content="#2a78d6">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <h1>Production solaire</h1>
+    <p class="muted" id="updated" aria-live="polite">Chargement…</p>
+  </header>
+
+  <main>
+    <div id="notice" class="notice" role="status" hidden></div>
+
+    <section class="kpis" aria-label="Aujourd'hui">
+      <div class="tile"><p class="tile-label">Puissance actuelle</p><p class="tile-value" id="k-power">–</p><p class="tile-sub" id="k-power-sub">&nbsp;</p></div>
+      <div class="tile"><p class="tile-label">Énergie aujourd'hui</p><p class="tile-value" id="k-energy">–</p><p class="tile-sub" id="k-energy-sub">&nbsp;</p></div>
+      <div class="tile"><p class="tile-label">Pic du jour</p><p class="tile-value" id="k-peak">–</p><p class="tile-sub" id="k-peak-sub">&nbsp;</p></div>
+      <div class="tile"><p class="tile-label">Soleil max</p><p class="tile-value" id="k-sun">–</p><p class="tile-sub">hauteur du jour</p></div>
+    </section>
+
+    <div class="tabs" role="tablist" aria-label="Affichage">
+      <button role="tab" id="tab-day" aria-controls="view-day" aria-selected="true">Jour</button>
+      <button role="tab" id="tab-history" aria-controls="view-history" aria-selected="false">Historique</button>
+    </div>
+
+    <section id="view-day" role="tabpanel" aria-labelledby="tab-day" class="card">
+      <div class="controls">
+        <button class="icon-btn" id="day-prev" aria-label="Jour précédent">‹</button>
+        <input type="date" id="day-input" aria-label="Choisir un jour" min="2000-01-01">
+        <button class="icon-btn" id="day-next" aria-label="Jour suivant">›</button>
+        <button class="btn" id="day-today">Aujourd'hui</button>
+      </div>
+      <h2 class="chart-title" id="day-title">Puissance</h2>
+      <p class="muted chart-sub" id="day-sub">&nbsp;</p>
+      <div class="chart" id="chart-day"></div>
+      <details class="table-view" id="table-day"><summary>Voir les données (tableau)</summary><div class="table-wrap"></div></details>
+    </section>
+
+    <section id="view-history" role="tabpanel" aria-labelledby="tab-history" class="card" hidden>
+      <div class="controls" role="group" aria-label="Période">
+        <button class="btn" data-range="30" aria-pressed="true">30 jours</button>
+        <button class="btn" data-range="90" aria-pressed="false">90 jours</button>
+        <button class="btn" data-range="365" aria-pressed="false">12 mois</button>
+      </div>
+      <h2 class="chart-title" id="hist-title">Énergie produite</h2>
+      <p class="muted chart-sub" id="hist-sub">&nbsp;</p>
+      <div class="chart" id="chart-hist"></div>
+      <details class="table-view" id="table-hist"><summary>Voir les données (tableau)</summary><div class="table-wrap"></div></details>
+    </section>
+  </main>
+
+  <footer class="muted" id="totals"></footer>
+</body>
+</html>

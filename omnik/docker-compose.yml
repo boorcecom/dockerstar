@@ -1,0 +1,23 @@
+services:
+  omniktcp:
+    container_name: omniktcp
+    image: omniktcp:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile.omnik
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    hostname: omniktcp
+    networks:
+      - network1
+    env_file:
+      - .env
+    environment:
+      TZ: 'Europe/Paris'
+    dns: 192.168.0.240      
+
+networks:
+  network1:
+    name: docker_default
+    external: true

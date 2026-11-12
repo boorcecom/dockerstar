@@ -1,0 +1,44 @@
+services:
+  bacula-director:
+    container_name: bacula-dir
+    image: bacula-dir:trixie
+    build: 
+      context: .
+      dockerfile: Dockerfile.director
+    volumes:
+      - /opt/bacula/etc/bacula:/etc/bacula
+#    ports:
+#      - 9101:9101
+    hostname: bacula-dir
+    networks:
+      - network1
+    dns: 192.168.0.240
+    environment:
+      TZ: 'Europe/Paris'
+    restart: unless-stopped
+  bacula-sd:
+    container_name: bacula-sd
+    image: bacula-sd:trixie
+    build:
+      context: .
+      dockerfile: Dockerfile.sd
+    restart: unless-stopped
+    depends_on:
+      - bacula-director
+    volumes:
+      - /opt/bacula/etc/bacula:/etc/bacula
+      - /mnt/Freebox/backups:/opt/backupdev
+      - /mnt/Freebox/backups2:/opt/backupdev2
+    ports:
+      - 9103:9103
+    hostname: bacula-sd
+    networks:
+      - network1
+    environment:
+      TZ: 'Europe/Paris'
+    dns: 192.168.0.250      
+
+networks:
+  network1:
+    name: docker_default
+    external: true

@@ -1,0 +1,33 @@
+# Exemple de vhost Apache (httpd ou publichttpd) devant le conteneur solar2.
+# Prérequis : a2enmod proxy proxy_http headers (headers n'est pas activé par défaut
+# dans apache-php/Dockerfile.httpd : ajouter "&& a2enmod headers").
+<VirtualHost *:80>
+        ServerName solar2.example.com
+        Redirect permanent / https://solar2.example.com/
+        Alias /.well-known/acme-challenge /etc/letsencrypt/.acme-challenges
+        <Directory /etc/letsencrypt/.acme-challenges>
+                Options None
+                AllowOverride None
+                Require all granted
+        </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName solar2.example.com
+        SSLCertificateFile /etc/letsencrypt/live/boorce.com/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/boorce.com/privkey.pem
+        Include /etc/letsencrypt/options-ssl-apache.conf
+
+        ProxyPreserveHost On
+        ProxyPass / http://solar2:8080/
+        ProxyPassReverse / http://solar2:8080/
+        # mod_proxy ajoute l'IP du client à X-Forwarded-For ; solar2 (SOLAR_TRUST_PROXY=true)
+        # lit la dernière entrée, celle posée par ce proxy.
+
+        <IfModule mod_headers.c>
+                Header always set Strict-Transport-Security "max-age=31536000"
+        </IfModule>
+
+        ErrorLog ${APACHE_LOG_DIR}/solar2_error.log
+        CustomLog ${APACHE_LOG_DIR}/solar2_access.log combined
+</VirtualHost>

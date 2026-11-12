@@ -1,0 +1,26 @@
+version: "3.5"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  squid:
+    container_name: squid
+    image: ubuntu/squid:latest
+    environment:
+      TZ: 'Europe/Paris'
+    volumes:
+      - '/etc/letsencrypt:/etc/letsencrypt'
+      - '/opt/squid_storage/etc-squid:/etc/squid/'
+      - '/opt/squid_storage/var-spool-squid:/var/spool/squid/'
+    dns: 192.168.0.240
+    hostname: squid
+    ports:
+      - 3128:3128
+    networks:
+      - network1
+    restart: unless-stopped
+
+networks:
+  network1:
+    name: docker_default
+    external: true
+    

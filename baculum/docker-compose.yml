@@ -1,0 +1,22 @@
+services:
+  baculum:
+    container_name: baculum
+    image: baculum:trixie
+    build: 
+      context: .
+      dockerfile: Dockerfile.baculum
+    volumes:
+      - /opt/bacula/etc/bacula:/etc/bacula
+      - /opt/bacula/etc/baculum:/etc/baculum
+    networks:
+      - network1
+    hostname: baculum
+    dns: 192.168.0.240
+    environment:
+      TZ: 'Europe/Paris'
+    restart: unless-stopped
+
+networks:
+  network1:
+    name: docker_default
+    external: true

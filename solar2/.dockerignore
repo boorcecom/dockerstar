@@ -1,0 +1,4 @@
+.env
+*.md
+sql/
+apache-solar2.conf.example
