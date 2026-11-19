@@ -1,0 +1,72 @@
+:root {
+  --bg: #f4f3f0; --card: #fff; --text: #1d2521; --muted: #5d6a63; --line: #e2e0da;
+  --accent: #0f6e56; --accent-soft: #dff1ea;
+  --good: #1a7f4b; --medium: #b7791f; --low: #b3392f; --best: #0f6e56;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101513; --card: #19201d; --text: #e9eeeb; --muted: #9aa8a0; --line: #2b3631;
+    --accent: #3fbf98; --accent-soft: #17352b;
+    --good: #4cc387; --medium: #e0a94a; --low: #ee7b6f; --best: #3fbf98;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding: 0 16px env(safe-area-inset-bottom);
+}
+.top, main, footer { max-width: 760px; margin: 0 auto; }
+.top { padding: 20px 0 8px; }
+h1 { margin: 0; font-size: 1.5rem; }
+h2 { margin: 0; font-size: 1.1rem; }
+.muted { color: var(--muted); font-size: .9rem; margin: .2rem 0 0; }
+footer { padding: 8px 0 28px; font-size: .8rem; }
+footer p { margin: .25rem 0; }
+
+.notice { background: #fff3cd; color: #5c4400; border-radius: 10px; padding: 10px 14px; margin: 8px 0; font-size: .9rem; }
+@media (prefers-color-scheme: dark) { .notice { background: #3a2f10; color: #f0d58c; } }
+
+.tabs { display: flex; gap: 6px; overflow-x: auto; margin: 12px 0; padding-bottom: 2px; }
+.tabs button {
+  flex: 1 0 auto; border: 1px solid var(--line); background: var(--card); color: var(--text);
+  border-radius: 999px; padding: 9px 16px; font: inherit; cursor: pointer; white-space: nowrap;
+}
+.tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin: 12px 0; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.check { font-size: .85rem; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+
+.stations { list-style: none; margin: 0; padding: 0; }
+.stations li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.stations li:first-child { border-top: 0; }
+.stations .name { font-weight: 600; }
+.stations .meta { color: var(--muted); font-size: .85rem; }
+.stations .price { grid-row: 1 / span 2; grid-column: 2; text-align: right; font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stations .price small { font-size: .75rem; font-weight: 400; color: var(--muted); }
+.stations li.best .price { color: var(--best); }
+.stations li.none .name, .stations li.none .meta { opacity: .6; }
+.stations li.none .price { font-size: 1rem; color: var(--muted); font-weight: 400; }
+.stations li.low .price { opacity: .6; }
+.badge { display: inline-block; font-size: .7rem; font-weight: 700; padding: 1px 6px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); margin-right: 6px; vertical-align: 1px; }
+.badge.be { background: #fde9c7; color: #6b4a00; }
+@media (prefers-color-scheme: dark) { .badge.be { background: #40320f; color: #f0d58c; } }
+.tag-best { font-size: .72rem; font-weight: 700; color: #fff; background: var(--best); border-radius: 6px; padding: 1px 6px; margin-left: 6px; }
+@media (prefers-color-scheme: dark) { .tag-best { color: #06130e; } }
+
+.rel { display: inline-flex; align-items: center; gap: 5px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
+.dot.good { background: var(--good); } .dot.medium { background: var(--medium); } .dot.low { background: var(--low); }
+
+.table-wrap { overflow-x: auto; margin-top: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: right; padding: 7px 8px; border-top: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { border-top: 0; color: var(--muted); font-weight: 600; }
+td.best { color: var(--best); font-weight: 700; }
+summary { cursor: pointer; font-weight: 600; }
+.legend ul { list-style: none; padding: 0; margin: 8px 0 0; font-size: .9rem; }
+.legend li { margin: 4px 0; }

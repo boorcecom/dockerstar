@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- pompe à carburant, dans la zone sûre (66 dp) des icônes adaptatives -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,32h26a4,4 0,0 1,4 4v38h4v6H31v-6h4z" />
+    <path
+        android:fillColor="#0F6E56"
+        android:pathData="M39,37h18v13H39z" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M65,43l7,6v13a3,3 0,0 0,6 0V50l-6,-6" />
+</vector>

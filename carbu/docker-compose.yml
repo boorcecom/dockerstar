@@ -1,0 +1,43 @@
+services:
+  carbu:
+    container_name: carbu
+    image: carbu:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TZ: 'Europe/Paris'
+      CARBU_TRUST_PROXY: 'true'     # derrière le reverse proxy Apache (httpd / publichttpd)
+      CARBU_ADMIN_TRUST_PROXY: 'true'  # le port 8081 (clés) n'est joint que via le vhost Apache LAN
+      # CARBU_ADMIN_LISTEN: 'off'   # désactive la gestion des clés (plus aucune écriture possible)
+      # CARBU_BE_ENABLED: 'false'   # coupe tout accès à carbu.com (Belgique sans prix)
+      # CARBU_BE_INTERVAL: '48h'    # passage sur carbu.com (plancher 12h)
+      # CARBU_FR_INTERVAL: '1h'
+    volumes:
+      - carbu-data:/data
+    # Aucun port publié (ni 8080 données, ni 8081 clés) : seuls les conteneurs du réseau
+    # docker_default (Apache) y accèdent.
+    networks:
+      - network1
+    dns: 192.168.0.240
+    hostname: carbu
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 64m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+
+volumes:
+  carbu-data:
+
+networks:
+  network1:
+    name: docker_default
+    external: true

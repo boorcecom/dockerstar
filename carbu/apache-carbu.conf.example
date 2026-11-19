@@ -1,0 +1,72 @@
+# Exemple de vhosts Apache (httpd ou publichttpd) devant le conteneur carbu.
+# Prérequis : a2enmod proxy proxy_http headers ssl.
+#
+# DEUX portes, volontairement séparées :
+#   - 443  : site + API de DONNÉES (lecture libre ; écriture seulement avec une clé d'API).
+#            Accessible depuis internet.
+#   - 8443 : API de GESTION DES CLÉS. LAN uniquement (voir « Sécurité » ci-dessous).
+#
+# Astuce DNS : avec le Pi-hole, faire résoudre carburants.example.com vers l'IP LAN du serveur.
+# Le même certificat sert alors les deux ports, et l'application Android (https obligatoire)
+# valide le certificat aussi bien en LAN que depuis internet.
+
+<VirtualHost *:80>
+        ServerName carburants.example.com
+        Redirect permanent / https://carburants.example.com/
+        Alias /.well-known/acme-challenge /etc/letsencrypt/.acme-challenges
+        <Directory /etc/letsencrypt/.acme-challenges>
+                Options None
+                AllowOverride None
+                Require all granted
+        </Directory>
+</VirtualHost>
+
+# --- Données : internet + LAN -------------------------------------------------------------
+<VirtualHost *:443>
+        ServerName carburants.example.com
+        SSLCertificateFile /etc/letsencrypt/live/boorce.com/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/boorce.com/privkey.pem
+        Include /etc/letsencrypt/options-ssl-apache.conf
+
+        ProxyPreserveHost On
+        ProxyPass / http://carbu:8080/
+        ProxyPassReverse / http://carbu:8080/
+        # mod_proxy ajoute l'IP du client à X-Forwarded-For ; carbu (CARBU_TRUST_PROXY=true)
+        # lit la dernière entrée, celle posée par ce proxy.
+
+        <IfModule mod_headers.c>
+                Header always set Strict-Transport-Security "max-age=31536000"
+        </IfModule>
+
+        ErrorLog ${APACHE_LOG_DIR}/carbu_error.log
+        CustomLog ${APACHE_LOG_DIR}/carbu_access.log combined
+</VirtualHost>
+
+# --- Gestion des clés : LAN UNIQUEMENT -----------------------------------------------------
+# Ajouter « Listen 8443 » dans ports.conf, ou mieux « Listen 192.168.0.X:8443 » (IP LAN du serveur).
+<VirtualHost *:8443>
+        ServerName carburants.example.com
+        SSLCertificateFile /etc/letsencrypt/live/boorce.com/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/boorce.com/privkey.pem
+        Include /etc/letsencrypt/options-ssl-apache.conf
+
+        # Barrière n°1 : Apache refuse tout ce qui n'est pas une adresse privée.
+        <Location />
+                Require ip 192.168.0.0/16 10.0.0.0/8 172.16.0.0/12 127.0.0.1
+        </Location>
+
+        ProxyPreserveHost On
+        ProxyPass / http://carbu:8081/
+        ProxyPassReverse / http://carbu:8081/
+        # Barrière n°2 : carbu (CARBU_ADMIN_TRUST_PROXY=true) relit X-Forwarded-For et refuse
+        # lui-même toute adresse non privée (ou l'absence de l'en-tête).
+
+        ErrorLog ${APACHE_LOG_DIR}/carbu_admin_error.log
+        CustomLog ${APACHE_LOG_DIR}/carbu_admin_access.log combined
+</VirtualHost>
+
+# Sécurité — barrière n°3 : le pare-feu. Ne JAMAIS rediriger le port 8443 sur la box/le routeur,
+# et le refuser côté WAN, par exemple avec ufw :
+#     ufw deny in on <interface-wan> to any port 8443 proto tcp
+#     ufw allow in on <interface-lan> from 192.168.0.0/16 to any port 8443 proto tcp
+# (voir update_ufw_docker.sh pour l'articulation avec les règles Docker).

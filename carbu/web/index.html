@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Prix carburants – Le Doulieu</title>
+  <meta name="description" content="Prix du carburant autour du Doulieu : France et frontière belge">
+  <meta name="theme-color" content="#0f6e56">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <h1>Prix carburants</h1>
+    <p class="muted" id="updated" aria-live="polite">Chargement…</p>
+  </header>
+
+  <main>
+    <div id="notice" class="notice" role="status" hidden></div>
+
+    <div class="tabs" role="tablist" aria-label="Carburant" id="fuel-tabs"></div>
+
+    <section class="card" aria-live="polite">
+      <div class="card-head">
+        <h2 id="list-title">Gazole</h2>
+        <label class="check"><input type="checkbox" id="hide-low"> Masquer les prix anciens</label>
+      </div>
+      <ol class="stations" id="list"></ol>
+    </section>
+
+    <section class="card">
+      <details>
+        <summary>Tous les carburants (tableau)</summary>
+        <div class="table-wrap" id="matrix"></div>
+      </details>
+    </section>
+
+    <section class="card legend" aria-label="Indice de fiabilité">
+      <h2>Indice de fiabilité</h2>
+      <p class="muted">Il mesure l'ancienneté du prix déclaré par la source, pas son exactitude.</p>
+      <ul>
+        <li><span class="dot good"></span> <b>Fiable</b> (≥ 75) : prix de moins de ~3 jours</li>
+        <li><span class="dot medium"></span> <b>À vérifier</b> (40–74) : entre ~3 et ~7 jours</li>
+        <li><span class="dot low"></span> <b>Ancien</b> (&lt; 40) : plus de ~7 jours, 0 au-delà de 10 jours</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="muted" id="sources"></footer>
+</body>
+</html>

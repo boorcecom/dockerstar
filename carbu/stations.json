@@ -1,0 +1,15 @@
+{
+  "origin": { "name": "Le Doulieu", "lat": 50.679621, "lon": 2.703757 },
+  "stations": [
+    { "id": "fr-59270002", "country": "FR", "source": "fr",    "ref": "59270002", "lat": 50.724, "lon": 2.74, "name": "Bailleul – Avenue des Nations Unies", "town": "Bailleul" },
+    { "id": "fr-59270003", "country": "FR", "source": "fr",    "ref": "59270003", "lat": 50.73084, "lon": 2.74532, "name": "Bailleul – Rue Gutenberg",            "town": "Bailleul" },
+    { "id": "fr-59270001", "country": "FR", "source": "fr",    "ref": "59270001", "lat": 50.739, "lon": 2.726, "name": "Bailleul – Route de Méteren",         "town": "Bailleul" },
+    { "id": "fr-59940001", "country": "FR", "source": "fr",    "ref": "59940001", "lat": 50.64413, "lon": 2.70632, "name": "Estaires – Route de Merville",        "town": "Estaires" },
+    { "id": "fr-59253001", "country": "FR", "source": "fr",    "ref": "59253001", "lat": 50.63346, "lon": 2.71151, "name": "La Gorgue – Avenue des Aulnes",       "town": "La Gorgue" },
+    { "id": "fr-59660002", "country": "FR", "source": "fr",    "ref": "59660002", "lat": 50.641, "lon": 2.654, "name": "Merville – Route d'Estaires",         "town": "Merville" },
+
+    { "id": "be-1508", "country": "BE", "source": "carbu", "ref": "1508", "name": "Gabriëls – Locre (Dikkebusstraat)", "town": "Locre", "lat": 50.785394, "lon": 2.771578 },
+    { "id": "be-1792", "country": "BE", "source": "carbu", "ref": "1792", "name": "HeiteS – Westouter (N372)",         "town": "Westouter", "lat": 50.788679, "lon": 2.771202 },
+    { "id": "be-3427", "country": "BE", "source": "carbu", "ref": "3427", "name": "Station Le Seau (N331)",            "town": "Le Seau", "lat": 50.73423, "lon": 2.814903 }
+  ]
+}
