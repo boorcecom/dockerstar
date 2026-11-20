@@ -9,6 +9,7 @@
     { "id": "fr-59660002", "country": "FR", "source": "fr",    "ref": "59660002", "lat": 50.641, "lon": 2.654, "name": "Merville – Route d'Estaires",         "town": "Merville" },
 
     { "id": "be-1508", "country": "BE", "source": "carbu", "ref": "1508", "name": "Gabriëls – Locre (Dikkebusstraat)", "town": "Locre", "lat": 50.785394, "lon": 2.771578 },
+    { "id": "be-8951", "country": "BE", "source": "carbu", "ref": "8951", "name": "Klokhof - Dranouter (Douanestraat)", "town": "Douanestraat", "lat": 50.763321, "lon": 2.757282 },
     { "id": "be-1792", "country": "BE", "source": "carbu", "ref": "1792", "name": "HeiteS – Westouter (N372)",         "town": "Westouter", "lat": 50.788679, "lon": 2.771202 },
     { "id": "be-3427", "country": "BE", "source": "carbu", "ref": "3427", "name": "Station Le Seau (N331)",            "town": "Le Seau", "lat": 50.73423, "lon": 2.814903 }
   ]
